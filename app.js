@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-  res.send('🚀 Hello from GCP Cloud Build Docker Demo 2 !');
+  res.send('🚀 Hello from GCP Cloud Build Docker Demo 2. !');
 });
 
 app.get('/health', (req, res) => {
