@@ -3,18 +3,18 @@ steps:
     args: [
       'build',
       '-t',
-      'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image',
+      'asia-south1-docker.pkg.dev/cloudcgcpdockerdemo/docker-repo/app-image',
       '.'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image'
+      'asia-south1-docker.pkg.dev/cloudcgcpdockerdemo/docker-repo/app-image'
     ]
 
 images:
-  - 'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image'
+  - 'asia-south1-docker.pkg.dev/cloudcgcpdockerdemo/docker-repo/app-image'
 
 options:
   logging: CLOUD_LOGGING_ONLY
