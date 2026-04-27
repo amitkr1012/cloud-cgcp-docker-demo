@@ -1,0 +1,33 @@
+steps:
+  # Step 1: Build Docker Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t',
+      'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image:$SHORT_SHA',
+      '.'
+    ]
+
+  # Step 2: Push Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image:$SHORT_SHA'
+    ]
+
+  # Step 3: Deploy to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=asia-south1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=cloud-demo-cluster'
+    args:
+      - set
+      - image
+      - deployment/docker-demo
+      - app-container=asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image:$SHORT_SHA
+
+images:
+  - 'asia-south1-docker.pkg.dev/$PROJECT_ID/docker-repo/app-image:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
