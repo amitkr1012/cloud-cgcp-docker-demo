@@ -2,7 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 // DB config from env (K8s secrets)
 const pool = new Pool({
